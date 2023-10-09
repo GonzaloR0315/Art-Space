@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Art-Space</string>
+    <string name="name1">las_meninas_01</string>
+    <string name="artist1">Diego Velazquez</string>
+    <string name="title1">Las Meninas</string>
+    <string name="name2">persistencia_2</string>
+    <string name="artist2">Salvador Dali</string>
+    <string name="title2">La persistencia de la memoria</string>
+    <string name="name3">licensed_image</string>
+    <string name="artist3">Leonardo da Vinci</string>
+    <string name="title3">La Gioconda</string>
+
 </resources>
