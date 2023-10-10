@@ -9,7 +9,8 @@
     <string name="name3">licensed_image</string>
     <string name="artist3">Leonardo da Vinci</string>
     <string name="title3">La Gioconda</string>
-    <string name="roll">Aleatorio</string>
+    <string name="anteriro">Anterior</string>
+    <string name="siguiente">Siguiente</string>
 
 
 </resources>
