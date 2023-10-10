@@ -76,6 +76,7 @@ fun printImage(modifier: Modifier = Modifier) {
         Image(
             painter = image,
             contentDescription = null,
+            modifier = Modifier.size(625.dp)
         )
 
         Text(
