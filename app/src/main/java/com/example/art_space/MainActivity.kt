@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
@@ -35,81 +36,42 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-//
-//@Composable
-//fun printImage(option: Int){
-//    var result by remember { mutableStateOf(option) }
-//    var image = painterResource(R.drawable.las_meninas_01)
-//    var titl = ""
-//    var artis = ""
-//    var dat = 0
-//    when(option){
-//        1 ->{
-//            image = painterResource(R.drawable.las_meninas_01)
-//            titl =  stringResource(R.string.title1)
-//            artis = stringResource(R.string.artist1)
-//            dat = 1656}
-//        2 ->{
-//            image = painterResource(R.drawable.persistencia_2)
-//            titl = stringResource(R.string.title2)
-//            artis = stringResource(R.string.artist2)
-//            dat = 1931}
-//        3 ->{
-//            image = painterResource(R.drawable.licensed_image)
-//            titl = stringResource(R.string.title3)
-//            artis = stringResource(R.string.artist3)
-//            dat = 1506}
-//    }
-//
-//    Column(
-//        modifier = Modifier.padding(40.dp),
-//        horizontalAlignment = Alignment.CenterHorizontally,
-////        verticalArrangement = Arrangement.Center
-//    ) {
-//        Image(
-//            painter = image,
-//            contentDescription = null,
-//        )
-//    }
-//    Button(onClick = { result = (1..6).random() }) {
-//        Text(stringResource(R.string.roll))
-//
-//    }
-//    artSpace( titl, artis, dat)
-//}
-//
-//
-
 
 @Composable
-fun printImage(modifier: Modifier){
+fun printImage(modifier: Modifier = Modifier) {
     var result by remember { mutableStateOf(1) }
     var image = painterResource(R.drawable.las_meninas_01)
     var titl = ""
     var artis = ""
     var dat = 0
-    when(result){
-        1 ->{
+
+    when (result) {
+        1 -> {
             image = painterResource(R.drawable.las_meninas_01)
-            titl =  stringResource(R.string.title1)
+            titl = stringResource(R.string.title1)
             artis = stringResource(R.string.artist1)
-            dat = 1656}
-        2 ->{
+            dat = 1656
+        }
+        2 -> {
             image = painterResource(R.drawable.persistencia_2)
             titl = stringResource(R.string.title2)
             artis = stringResource(R.string.artist2)
-            dat = 1931}
-        3 ->{
+            dat = 1931
+        }
+        3 -> {
             image = painterResource(R.drawable.licensed_image)
             titl = stringResource(R.string.title3)
             artis = stringResource(R.string.artist3)
-            dat = 1506}
+            dat = 1506
+        }
     }
 
+    val buttonSpacing = dimensionResource(R.dimen.button_spacing)
+
     Column(
-        modifier = Modifier.padding(40.dp),
+        modifier = Modifier.padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-//        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center
     ) {
         Image(
             painter = image,
@@ -121,7 +83,8 @@ fun printImage(modifier: Modifier){
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
         )
-        Row(){
+
+        Row() {
             Text(
                 text = artis,
                 fontSize = 12.sp,
@@ -133,48 +96,52 @@ fun printImage(modifier: Modifier){
             )
         }
 
-    Button(onClick = { result = (1..3).random() }, modifier = Modifier) {
-        Text(stringResource(R.string.roll))
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = buttonSpacing),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Button(
+                onClick = {
+                    if (result >= 1) {
+                        result--
+                        if (result < 1) {
+                            result = 3
+                        }
+                    }
+                },
+                modifier = Modifier.weight(1f)
+            ) {
+                Text(stringResource(R.string.anterior))
+            }
 
-    }}
+            Spacer(modifier = Modifier.width(buttonSpacing))
+
+            Button(
+                onClick = {
+                    if (result <= 3) {
+                        result++
+                        if (result > 3) {
+                            result = 1
+                        }
+                    }
+                },
+                modifier = Modifier.weight(1f)
+            ) {
+                Text(stringResource(R.string.siguiente))
+            }
+        }
+    }
 }
 
 
-//@Composable
-//fun artSpace( title: String, artist: String, fecha: Int, modifier: Modifier = Modifier) {
-//    Column(
-//        modifier = Modifier.padding(40.dp),
-//        horizontalAlignment = Alignment.CenterHorizontally,
-//        verticalArrangement = Arrangement.Bottom
-//    ) {
-//
-//        Text(
-//            text = title,
-//            fontWeight = FontWeight.Bold,
-//            fontSize = 20.sp,
-//            modifier = modifier
-//        )
-//        Row(){
-//            Text(
-//                text = artist,
-//                fontSize = 12.sp,
-//                modifier = modifier
-//            )
-//            Text(
-//                text = " $fecha",
-//                fontStyle = FontStyle.Italic,
-//                fontSize = 12.sp,
-//                modifier = modifier
-//            )
-//        }
-//    }
-//}
 
 @Preview(showBackground = true)
 @Composable
 fun ArtSpaces() {
         printImage( modifier = Modifier
-            .fillMaxSize()
+            //.fillMaxSize()
             .wrapContentSize(Alignment.Center) )
 
 }
